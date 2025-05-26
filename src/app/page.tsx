@@ -6,6 +6,7 @@ import { Github, Linkedin, Mail, ExternalLink, Code, Download, Star, MapPin, Cal
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image";
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState("experience")
@@ -26,7 +27,7 @@ export default function Portfolio() {
     },
     {
       title: "CSM MapBan Service",
-      description: "Service for creating, streaming, and organizing CS tournaments.",
+      description: "Service for creating, streaming, and organizing cybersport tournaments.",
       tech: [
         { name: "TypeScript", color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
         { name: "React", color: "bg-sky-400/20 text-sky-300 border-sky-400/30" },
@@ -55,7 +56,7 @@ export default function Portfolio() {
   const personalProjects = [
     {
       title: "Blockchain Implementation",
-      description: "Optimized Bitcoin implementation with additional security features.",
+      description: "Optimized Bitcoin implementation with additional optimization features.",
       tech: [
         { name: "Python", color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30" },
         { name: "Cryptography", color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
@@ -68,8 +69,7 @@ export default function Portfolio() {
       description: "Computer vision algorithm to detect when a kettle is boiling using visual cues.",
       tech: [
         { name: "Python", color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30" },
-        { name: "OpenCV", color: "bg-green-500/20 text-green-400 border-green-500/30" },
-        { name: "TensorFlow", color: "bg-orange-500/20 text-orange-400 border-orange-500/30" },
+        { name: "OpenCV", color: "bg-green-500/20 text-green-400 border-green-500/30" }
       ],
       status: "Complete",
       gradient: "from-gray-600 to-gray-700",
@@ -109,7 +109,7 @@ export default function Portfolio() {
                     size="sm"
                     className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white"
                 >
-                  <Download className="w-4 h-4 mr-2" /> {/* TODO: ADD DOWNLOAD*/}
+                  <Download className="w-4 h-4 mr-2" />
                   CV
                 </Button>
               </a>
@@ -132,7 +132,9 @@ export default function Portfolio() {
                     <div className="w-24 h-24 mx-auto lg:mx-0 mb-8 relative">
                       <div className="absolute inset-0 bg-orange-500 rounded-full" />
                       <div className="absolute inset-1 bg-[#0a0a0f] rounded-full overflow-hidden">
-                        <img
+                        <Image
+                            width="516"
+                            height="516"
                             src="/pfp.jpg"
                             alt="Timofey Zhuchkov"
                             className="w-full h-full object-cover rounded-full"
@@ -315,48 +317,53 @@ export default function Portfolio() {
                         className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
                     >
                       {experienceProjects.map((project) => (
-                          <Card
-                              key={project.title}
-                              className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group"
-                          >
-                            <CardContent className="p-6">
-                              <div
-                                  className={`w-full h-32 bg-gradient-to-br ${project.gradient} rounded-lg mb-4 flex items-center justify-center relative overflow-hidden`}
-                              >
-                                <div className="absolute inset-0 bg-black/20" />
-                                <div className="relative z-10 text-center">
-                                  <h3 className="text-lg font-bold text-white mb-1">{project.title}</h3>
-                                  <Badge variant="secondary" className="bg-white/20 text-white text-xs pointer-events-none">
-                                    {project.status}
-                                  </Badge>
-                                </div>
-                              </div>
-
-                              <p className="text-white/80 text-sm leading-relaxed mb-3">{project.description}</p>
-
-                              <div className="flex flex-wrap gap-1 mb-3">
-                                {project.tech.map((tech) => (
-                                    <Badge
-                                        key={tech.name}
-                                        variant="secondary"
-                                        className={`${tech.color} text-xs pointer-events-none`}
-                                    >
-                                      {tech.name}
+                          <a key={project.link}
+                             href={project.link}
+                             target="_blank"
+                             rel="noopener noreferrer">
+                            <Card
+                                key={project.title}
+                                className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group"
+                            >
+                              <CardContent className="p-6">
+                                <div
+                                    className={`w-full h-32 bg-gradient-to-br ${project.gradient} rounded-lg mb-4 flex items-center justify-center relative overflow-hidden`}
+                                >
+                                  <div className="absolute inset-0 bg-black/20" />
+                                  <div className="relative z-10 text-center">
+                                    <h3 className="text-lg font-bold text-white mb-1">{project.title}</h3>
+                                    <Badge variant="secondary" className="bg-white/20 text-white text-xs pointer-events-none">
+                                      {project.status}
                                     </Badge>
-                                ))}
-                              </div>
+                                  </div>
+                                </div>
+
+                                <p className="text-white/80 text-sm leading-relaxed mb-3">{project.description}</p>
+
+                                <div className="flex flex-wrap gap-1 mb-3">
+                                  {project.tech.map((tech) => (
+                                      <Badge
+                                          key={tech.name}
+                                          variant="secondary"
+                                          className={`${tech.color} text-xs pointer-events-none`}
+                                      >
+                                        {tech.name}
+                                      </Badge>
+                                  ))}
+                                </div>
 
 
-                              <a href={project.link}
-                                 target="_blank"
-                                 rel="noopener noreferrer">
-                                <Button variant="ghost" size="sm" className="text-orange-500 hover:text-orange-400 p-0 h-auto">
-                                  Learn More
-                                  <ExternalLink className="w-3 h-3 ml-1" />
-                                </Button>
-                              </a>
-                            </CardContent>
-                          </Card>
+                                <a href={project.link}
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                  <Button variant="ghost" size="sm" className="text-orange-500 hover:text-orange-400 p-0 h-auto">
+                                    Learn More
+                                    <ExternalLink className="w-3 h-3 ml-1" />
+                                  </Button>
+                                </a>
+                              </CardContent>
+                            </Card>
+                          </a>
                       ))}
                     </motion.div>
                 )}
@@ -399,7 +406,7 @@ export default function Portfolio() {
                                 ))}
                               </div>
 
-                              <a href="http://github.com/GooseMooz"
+                              <a href="https://github.com/GooseMooz"
                                  target="_blank"
                                  rel="noopener noreferrer">
                                 <Button variant="ghost" size="sm" className="text-orange-500 hover:text-orange-400 p-0 h-auto">
